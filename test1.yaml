@@ -16,3 +16,6 @@
       copy:
         content: "Welcome to Anisble!!"
         dest: /var/www/html/index.html  
+    - name: print message
+      debug: 
+        msg: hello ansible world
