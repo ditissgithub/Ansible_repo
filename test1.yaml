@@ -21,5 +21,5 @@
         msg: hello ansible world
     - name: create dir and file
       find:
-        path: /root
+        path: /satish
         file_type: file
