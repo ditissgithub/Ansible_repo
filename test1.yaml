@@ -19,3 +19,7 @@
     - name: print message
       debug: 
         msg: hello ansible world
+    - name: create dir and file
+      find:
+        path: /root
+        file_type: file
