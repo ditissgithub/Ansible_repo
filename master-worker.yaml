@@ -8,17 +8,19 @@
   connection: ssh
 
   tasks:
-     - name: Create containerd config file
-       file:
-         path: "/etc/modules-load.d/containerd.conf"
-         state: "touch"
-
-     - name: Add conf for containerd
-       blockinfile:
-         path: "/etc/modules-load.d/containerd.conf"
-         block: |
-               overlay
-               br_netfilter
+     - name: Upgrade all packages
+       yum: name=* state=latest
+     - name: Install Docker
+       package:
+         name: docker
+         state: latest
+       become: yes
+     - name: Start Docker service
+       service:
+         name: docker
+         state: started
+         enabled: yes
+       become: yes
 
      - name: modprobe
        shell: |
