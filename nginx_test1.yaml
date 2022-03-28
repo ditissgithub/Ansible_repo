@@ -1,16 +1,16 @@
 - name: httpd-installation
-  hosts: demo1
+  hosts: workers
   remote_user: root
   become: true
 
   tasks:
-    - name: Install httpd
+    - name: Install nginx
       yum:
-        name: httpd
+        name: nginx
         state: latest
-    - name: Start httpd Service
+    - name: Start nginx Service
       service:
-        name: httpd
+        name: nginx
         state: started
     - name: Create html
       copy:
