@@ -4,7 +4,7 @@
 $ kubectl get nodes
 The connection to the server localhost:8080 was refused - did you specify the right host or port?
 #Then you run this three command your master nodes.
-$ sudo mkdir -p $HOME/.kube
-$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-$ sudo chown $(id -u):$(id -g) $HOME/.kube/config
+first: "$ sudo mkdir -p $HOME/.kube"
+second: "$ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config"
+third: "$ sudo chown $(id -u):$(id -g) $HOME/.kube/config"
 --------------------------------------------------------------------
