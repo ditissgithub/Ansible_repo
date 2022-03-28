@@ -25,7 +25,7 @@
     - name: install Pod network
       become: yes
       become_user: kube
-      shell: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml 
+      shell:  
       args:
         chdir: $HOME
         
