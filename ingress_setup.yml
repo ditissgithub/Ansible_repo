@@ -9,6 +9,7 @@
      command: git clone https://github.com/vipin-k/kubernetes-ingress.git
      ignore_errors: yes
    - name: install ansible
+     command: yum install epel-release
      command: yum install ansible
      ignore_errors: yes
    - name: Go to deployment directory  and apply setup
