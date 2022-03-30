@@ -8,10 +8,19 @@
    - name: install all package related to nginx_ingress from nginx github 
      command: git clone https://github.com/vipin-k/kubernetes-ingress.git
      ignore_errors: yes
+   - name: install epel-release
+     yum:
+       name: epel-release
+       state: present
+       update_cache: true
+
    - name: install ansible
-     command: yum install epel-release
-     command: yum install ansible
+     yum:
+       name: ansible
+       state: present
+       update_cache: true
      ignore_errors: yes
+
    - name: Go to deployment directory  and apply setup
      command: cd kubernetes-ingress/
      command: cd deployments/
