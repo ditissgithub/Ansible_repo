@@ -6,7 +6,7 @@
      command: yum install git
      ignore_errors: yes
    - name: install all package related to nginx_ingress from nginx github 
-     command: git clone https://github.com/vipin-k/kubernetes-ingress.git
+     command: git clone https://github.com/nginxinc/kubernetes-ingress
      ignore_errors: yes
    - name: install epel-release
      yum:
