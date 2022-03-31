@@ -1,7 +1,9 @@
 kind: Pod                              
 apiVersion: v1                     
 metadata:                           
-  name: testpod                  
+  name: testpod
+  annotations:
+      description: "creating first pod for ubuntu image and write hello-satish in ubuntu container."
 spec:                                    
   containers:                      
     - name: c00                     
