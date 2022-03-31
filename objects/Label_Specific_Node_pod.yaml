@@ -1,0 +1,14 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nodelabelspod
+  labels:
+    env: development
+spec:
+    containers:
+       - name: c00
+         image: ubuntu
+         command: ["/bin/bash", "-c", "while true; do echo Hello-Satish; sleep 5 ; done"]
+    nodeSelector: 
+    #specify the node label for specific pod creation in Worker-Node1 node.
+       hardware: Worker-Node1
