@@ -2,9 +2,6 @@
 - hosts: masters
   become: yes
   tasks:
-   - name: install git
-     command: yum install git
-     ignore_errors: yes
    - name: install epel-release
      yum:
        name: epel-release
