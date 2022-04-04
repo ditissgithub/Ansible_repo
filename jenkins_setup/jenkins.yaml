@@ -1,1 +1,25 @@
+---
+- hosts: masters
+  become: yes
+  tasks:
+   - name: install git
+     command: yum install git
+     ignore_errors: yes
+   - name: install epel-release
+     yum:
+       name: epel-release
+       state: present
+       update_cache: true
 
+   - name: install ansible
+     yum:
+       name: ansible
+       state: present
+       update_cache: true
+     ignore_errors: yes
+
+   - name: Go to deployment directory  and apply setup
+     command: docker run -d -v jenkins_home:/var/jenkins_home -p 8080:8080 -p 50000:50000 jenkins/jenkins:lts-jdk11
+     command: docker ps -lq 
+     
+     # INComplete
