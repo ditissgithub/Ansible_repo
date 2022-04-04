@@ -2,10 +2,10 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-myapp
-# namespace: kubernetes-dashboard 
+  namespace: nginx-ingress  #Namespace gone be same as service and pod!
 spec:
   rules:
-  - host: myapp.com  # valid domain address and map domain name to Node's IP address, which is the entrypoint
+  - host: myapp.com  # valid domain address and map domain name to Node's IP address, which is the entrypoint,must be mapped in /etc/hosts directory .
     http:
         paths:
         - backend:
