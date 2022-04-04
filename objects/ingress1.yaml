@@ -8,6 +8,12 @@ spec:
   - host: myapp.com  # valid domain address and map domain name to Node's IP address, which is the entrypoint,must be mapped in /etc/hosts directory .
     http:
         paths:
+      # - path: /democalamder 
         - backend:
              serviceName: demoservice   # No nodePort in internal service, Instead of loadbalancer default type: ClusterIP
              servicePort: 80
+      # - path: /shopping 
+      #   backend:
+      #      serviceName: shopping-service   # No nodePort in internal service, Instead of loadbalancer default type: ClusterIP
+      #      servicePort: 3000
+       
