@@ -8,5 +8,5 @@ spec:
     http:
         paths:
         - backend:
-             serviceName: myapp-internal-services
+             serviceName: demoservice1
              servicePort: 8080
