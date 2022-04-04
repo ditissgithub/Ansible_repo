@@ -6,9 +6,10 @@ metadata:
 spec:
   rules:
   - host: myapp.com  # valid domain address and map domain name to Node's IP address, which is the entrypoint,must be mapped in /etc/hosts directory .
+# - host: calander.myapp.com     #we can create sub-domains!(instead of above one to call direct demoservice. but one imp thing noticed individual path not be provide. )   
     http:
         paths:
-      # - path: /democalamder 
+      # - path: /democalander 
         - backend:
              serviceName: demoservice   # No nodePort in internal service, Instead of loadbalancer default type: ClusterIP
              servicePort: 80
