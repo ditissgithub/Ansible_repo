@@ -2,11 +2,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-myapp
+# namespace: kubernetes-dashboard 
 spec:
   rules:
-  - host: myapp.com
+  - host: myapp.com  # valid domain address and map domain name to Node's IP address, which is the entrypoint
     http:
         paths:
         - backend:
-             serviceName: demoservice1
+             serviceName: demoservice   # No nodePort in internal service, Instead of loadbalancer default type: ClusterIP
              servicePort: 80
