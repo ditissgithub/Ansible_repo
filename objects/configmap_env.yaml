@@ -4,7 +4,7 @@ metadata:
   name: myenvconfig
 spec:
   containers:
-  - name: c1
+  - name: c2
     image: centos
     command: ["/bin/bash", "-c", "while true; do echo Jack Sparrow; sleep 5 ; done"]
     env:
