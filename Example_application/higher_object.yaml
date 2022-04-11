@@ -18,9 +18,9 @@ spec:
         - name: c00
           image: ubuntu
           command: ["/bin/bash", "-c", "while true; do echo cdac_ditiss; sleep 5; done"]
-     nodeSelector: 
+      nodeSelector: 
     #specify the node label for specific pod creation in Worker-Node1 node.
-       hardware: worker.one.com         
+        hardware: worker.one.com         
 ---
 kind: Service                             # Defines to create Service type Object
 apiVersion: v1
