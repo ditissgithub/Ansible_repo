@@ -1,0 +1,36 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+   name: mydeployments
+spec:
+   replicas: 2
+   selector:     
+    matchLabels:
+     name: deployment
+   template:
+     metadata:
+       name: marvelpod
+       labels:
+         name: deployment
+     spec:
+      containers:
+        - name: c00
+          image: ubuntu
+          command: ["/bin/bash", "-c", "while true; do echo cdac_ditiss; sleep 5; done"]
+     nodeSelector: 
+    #specify the node label for specific pod creation in Worker-Node1 node.
+       hardware: worker.one.com         
+---
+kind: Service                             # Defines to create Service type Object
+apiVersion: v1
+metadata:
+  name: demoservice
+spec:
+  ports:
+    - port: 80                               # Containers port exposed
+      targetPort: 80                     # Pods port
+  selector:
+    name: deployment                    # Apply this service to any pods which has the specific label
+  type: ClusterIP                       # Specifies the service type i.e ClusterIP or NodePort
+          
