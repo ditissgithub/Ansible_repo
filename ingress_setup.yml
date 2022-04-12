@@ -3,9 +3,9 @@
   become: yes
   tasks:
    - name: install git
-     command: yum install git
+     command: yum install git -y
      ignore_errors: yes
-   - name: install all package related to nginx_ingress from nginx github 
+   - name: install all package related to nginx_ingress from nginx github
      command: git clone https://github.com/ditissgithub/ingress_controller_setup.git
      ignore_errors: yes
    - name: install epel-release
@@ -24,11 +24,12 @@
    - name: Go to deployment directory  and apply setup
      command: cd kubernetes-ingress/
      command: cd deployments/
-     command: kubectl apply -f common/ns-and-sa.yaml
-     command: kubectl apply -f common/default-server-secret.yaml
-     command: kubectl apply -f common/nginx-config.yaml
-     command: kubectl apply -f common/custom-resource-definitions.yaml
-     command: kubectl apply -f rbac/rbac.yaml
-     command: kubectl apply -f daemon-set/nginx-ingress.yaml
+     command: kubectl apply -f /root/ingress_controller_setup/deployments/common/ns-and-sa.yaml
+     command: kubectl apply -f /root/ingress_controller_setup/deployments/common/default-server-secret.yaml
+     command: kubectl apply -f /root/ingress_controller_setup/deployments/common/nginx-config.yaml
+     command: kubectl apply -f /root/ingress_controller_setup/deployments/common/custom-resource-definitions.yaml
+     command: kubectl apply -f /root/ingress_controller_setup/deployments/rbac/rbac.yaml
+     command: kubectl apply -f /root/ingress_controller_setup/deployments/daemon-set/nginx-ingress.yaml
      command: kubectl get pods -n nginx-ingress
      ignore_errors: yes
+
