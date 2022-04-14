@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: websv
-          image: nginx
+          image: httpd
           ports:
           - containerPort: 80
 ---
