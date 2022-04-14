@@ -1,3 +1,28 @@
 node {
+    git "https://github.com/ditissgithub/Ansible_repo.git"
+ def deployment = input(message: ''Is this New Build?', ok: 'Button'
+                        parameters: [booleanParam(defaultValue: true,
+                        description: 'just push the button',name: 'Yes?')])
+                       
+                        
+if (deployment == true)
+{
+   echo "New Image"
+   sh '''ssh -T root@10.8.0.201
+   scp -r /root/.jenkins/workspace/2 root@10.8.0.201:/opt/project/demo/
+   ssh -T root@10.8.0.201 kubectl apply -f /opt/project/demo/2/deployment.yaml --record
+'''
+}
+
+else
+{
+   echo "Updating existing image"
+   sh '''ssh -T root@10.8.0.201
+   scp -r /root/.jenkins/workspace/2 root@10.8.0.201:/opt/project/demo/
+   ssh -T root@10.8.0.201 chmod 0755 /opt/project/demo/2/*.sh
+   ssh -T root@10.8.0.201 /opt/project/demo/2/./rollout.sh
+      '''
+}
+}                        
     
 }
