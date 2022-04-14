@@ -27,8 +27,9 @@ metadata:
   name: marvelservice
 spec:
   ports:
-    - port: 80                               # Containers port exposed
-      targetPort: 80                     # Pods port
+    - protocol: TCP
+      port: 80                               # Containers port exposed
+      targetPort: 8080                     # Pods port
   selector:
     name: deployment                    # Apply this service to any pods which has the specific label
   type: LoadBalancer                       # Specifies the service type i.e ClusterIP or NodePort
