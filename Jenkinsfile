@@ -27,6 +27,16 @@ pipeline{
               steps{
                    sh "chmod + changeTag.sh"
                    sh "./changeTag.sh ${DOCKER_TAG}"
+                   sshCommand(){
+                       sh "scp -o StrictHostKeyChecking=no higher_object.yaml application-pod.yaml root@10.8.0.201/root/"
+                       script{
+                           try{
+                               sh "ssh root@10.8.0.201 kubectl apply -f ."
+                           }catch(error){
+                               sh "ssh root@10.8.0.201 kubectl create -f ."
+                           }
+                       }
+                  }
                }
           }
     }
