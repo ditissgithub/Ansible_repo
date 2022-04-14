@@ -1,6 +1,6 @@
 node {
     git "https://github.com/ditissgithub/Ansible_repo.git"
- def deployment = input(message: 'Is this New Build?', ok: 'Button'
+ def deployment = input(message: 'Is this New Build?', ok: 'Button',
                         parameters: [booleanParam(defaultValue: true,
                         description: 'just push the button',name: 'Yes?')])
                        
