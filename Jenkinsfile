@@ -1,26 +1,38 @@
 pipeline{
     
     agent any
+    environment{
+          DOCKER_TAG = getDockerTag()
+    }
     
     stages{
     
-          stage("build"){
+          stage("Build Docker Image"){
                 
               steps{
-                   echo 'building the application..'
+                   sh "docker build . -t ditissdocker/myappk8s:$(DOCKER_TAG) "
               }
           }
-          stage("test"){
+          stage("DockerHub Push"){
               
               steps{
-                   echo 'testing the application..'
+                  withCredentials([string(credentialsID: 'docker-hub', variable: 'dockerHubPwd')]){
+                      sh "docker login -u ditissdocker -p ${dockerHubPwd}"
+                      sh "docker push ditissdocker/myappk8s:${DOCKER_TAG}"
+                  }
                }
           }
-          stage("deploy"){
+          stage("Deploy to k8s"){
               
               steps{
-                   echo 'deploying the application..'
+                   sh "chmod + changeTag.sh"
+                   sh "./changeTag.sh ${DOCKER_TAG}"
                }
           }
     }
  }
+
+def getDockerTag(){
+    def tag = sh script: 'git rev-parse HEAD', returnStdout: true
+    return tag
+}
