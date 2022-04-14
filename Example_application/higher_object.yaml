@@ -2,7 +2,7 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-   name: mydeployments
+   name: marveldeploy
 spec:
    replicas: 2
    selector:     
@@ -15,22 +15,21 @@ spec:
          name: deployment
      spec:
       containers:
-        - name: c00
-          image: ubuntu
-          command: ["/bin/bash", "-c", "while true; do echo cdac_ditiss; sleep 5; done"]
-      nodeSelector: 
-    #specify the node label for specific pod creation in Worker-Node1 node.
-        hardware: worker.one.com         
+        - name: marvelapp
+          image: ditissdocker/myappk8s:tagVersion
+          ports:
+            - containerPort: 8080
+              
 ---
 kind: Service                             # Defines to create Service type Object
 apiVersion: v1
 metadata:
-  name: demoservice
+  name: marvelservice
 spec:
   ports:
     - port: 80                               # Containers port exposed
       targetPort: 80                     # Pods port
   selector:
     name: deployment                    # Apply this service to any pods which has the specific label
-  type: ClusterIP                       # Specifies the service type i.e ClusterIP or NodePort
+  type: LoadBalancer                       # Specifies the service type i.e ClusterIP or NodePort
           
