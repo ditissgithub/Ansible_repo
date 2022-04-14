@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apachewebsv
+spec: 
+  replicas: 4
+  selector:
+    matchLabels:
+      name: dev 
+  template:
+    metadata:
+      name: testpod
+      labels:
+        name: dev
+    spec:
+      containers:
+        - name: websv
+          image: nginx
+          ports:
+          - containerPort: 80
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: apacheservice
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    name: dev
+  type: NodePort
