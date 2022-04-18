@@ -1,5 +1,12 @@
 ---
 apiVersion: v1
+kind: Namespace
+metadata:
+   name: namespace-a
+   labels:
+     myspace: namespacea
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: local-path-pvc
