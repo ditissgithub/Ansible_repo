@@ -1,0 +1,54 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: local-path-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: local-path
+  resources:
+    requests:
+      storage: 128Mi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: appdeploy
+spec: 
+  replicas: 4
+  selector:
+    matchLabels:
+      name: marvel 
+  template:
+    metadata:
+      name: apppod
+      labels:
+        name: marvel
+    spec:
+      containers:
+        - name: appcontainer
+          image: devendra6991/website
+          ports:
+          - containerPort: 80
+          volumeMounts:
+          - mountPath: /tmp/hostpath
+            name: appvolume
+      volumes:
+      - name: appvolume
+        persistentVolumeClaim:
+          claimName: local-path-pvc
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: appservice
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    name: marvel
+  type: NodePort
